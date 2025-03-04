@@ -274,6 +274,16 @@ const countAllItems = () =>{
     return total
 }
 
+const isItemAlreadyAdded = (plant) =>{
+    const items = cartItemList;
+    const found = items.find((item) => item.name == plant.name);
+    if (found)
+    {
+        return true;
+    }
+    return false;
+}
+
     return (
         <div>
              <div className="navbar" style={styleObj}>
@@ -308,7 +318,7 @@ const countAllItems = () =>{
                                 <img className="product-image" src={plant.image} alt={plant.name} />
                                 <p>{plant.cost}</p>
                                 <p>{plant.description}</p>
-                                <button  className="product-button" onClick={() => handleAddToCart(plant)}>Add to Cart</button>
+                                <button  className={isItemAlreadyAdded(plant) ? "product-button-disabled" : "product-button"} onClick={() => handleAddToCart(plant)} disabled={isItemAlreadyAdded(plant)}>{isItemAlreadyAdded(plant) ? 'Already Added' : 'Add to Cart'}</button>
                             </div>
                         ))}
                     </div>
