@@ -1,12 +1,15 @@
 import React, { useState,useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import './ProductList.css'
 import CartItem from './CartItem';
-import addItem from './CartSlice';
+import { addItem } from './CartSlice';
 
 function ProductList() {
     const [showCart, setShowCart] = useState(false); 
     const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
-    const [addedToCart, setAddedToCart] = useState([]);
+    const [addedToCart, setAddedToCart] = useState({});
+
+    const dispatch = useDispatch();
 
     const plantsArray = [
         {
@@ -246,11 +249,21 @@ const handlePlantsClick = (e) => {
 };
 
 const handleAddToCart = (plant) => {
-    dispatch(addItem(product));
+    console.log("handling add click")
+    console.log(plant)
+
+    const p2 =               {
+        name: "Aloe Vera",
+        image: "https://cdn.pixabay.com/photo/2018/04/02/07/42/leaf-3283175_1280.jpg",
+        description: "Purifies the air and has healing properties for skin.",
+        cost: "$14"
+    };
+    console.log(addItem)
+    dispatch(addItem(p2));
     setAddedToCart((prevState) => (
         {
             ...prevState,
-            [product.name]: true,
+            [plant.name]: true,
         }
     ));
 };
